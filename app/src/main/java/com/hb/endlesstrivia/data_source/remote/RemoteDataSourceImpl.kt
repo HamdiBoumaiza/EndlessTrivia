@@ -27,7 +27,7 @@ class RemoteDataSourceImpl(
     ): ResultApi<ResponseListTrivia> =
         withContext(ioDispatcher) {
             val request =
-                api.getListTrivia(
+                api.getListTriviaAsync(
                     requestListTrivia.amount,
                     requestListTrivia.category,
                     requestListTrivia.difficulty,

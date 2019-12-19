@@ -6,11 +6,10 @@ import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.snackbar.Snackbar
 
 
 fun Context.toast(message: String) {
@@ -28,13 +27,13 @@ fun View.hide() {
 @ColorInt
 internal fun View.color(@ColorRes attribute: Int): Int = ContextCompat.getColor(context, attribute)
 
-/**
- * For Actvities, allows declarations like
- * ```
- * val myViewModel = viewModelProvider(myViewModelFactory)
- * ```
- */
+
 inline fun <reified VM : ViewModel> FragmentActivity.viewModelProvider(
     provider: ViewModelProvider.Factory
 ) =
-    ViewModelProviders.of(this, provider).get(VM::class.java)
+    ViewModelProvider(this, provider).get(VM::class.java)
+
+
+fun View.showSnackbar(snackbarText: String) {
+    Snackbar.make(this, snackbarText, Snackbar.LENGTH_LONG).show()
+}

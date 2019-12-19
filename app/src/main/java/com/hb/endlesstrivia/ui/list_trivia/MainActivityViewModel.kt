@@ -1,19 +1,19 @@
-package com.hb.endlesstrivia.ui
+package com.hb.endlesstrivia.ui.list_trivia
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hb.endlesstrivia.data.RequestListTrivia
 import com.hb.endlesstrivia.data.ResultApi
 import com.hb.endlesstrivia.model.Trivia
 import com.hb.endlesstrivia.repository.AppRepositoryImpl
-import com.hb.endlesstrivia.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivityViewModel @Inject constructor(
     private val repositoryImpl: AppRepositoryImpl
-) : BaseViewModel() {
+) : ViewModel() {
 
     private var _resultListTrivia = MutableLiveData<List<Trivia>>()
     var resultListTrivia: LiveData<List<Trivia>> = _resultListTrivia
@@ -26,21 +26,19 @@ class MainActivityViewModel @Inject constructor(
             try {
                 when (val response = repositoryImpl.getListTriviaApi(requestListTrivia)) {
                     is ResultApi.Success -> {
-                        toggleLoading.postValue(false)
                         _resultListTrivia.postValue(response.data)
                     }
                     is ResultApi.Error -> {
-                        toggleLoading.postValue(false)
+                        _errorMessage.postValue("")
                     }
                 }
             } catch (e: Exception) {
                 _errorMessage.postValue(e.message)
-                toggleLoading.postValue(false)
             }
         }
     }
 
-    fun getListOfTriviasDB(requestListTrivia: RequestListTrivia) {
+    fun getListOfTriviasDB() {
         viewModelScope.launch {
             _resultListTrivia.postValue(repositoryImpl.getListTriviaDb())
         }

@@ -1,4 +1,4 @@
-package com.hb.endlesstrivia.ui
+package com.hb.endlesstrivia.ui.list_trivia
 
 import com.hb.endlesstrivia.model.Trivia
 

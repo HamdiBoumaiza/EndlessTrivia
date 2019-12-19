@@ -4,13 +4,14 @@ import android.app.Application
 import androidx.room.Room
 import com.hb.endlesstrivia.data_source.local.AppDao
 import com.hb.endlesstrivia.data_source.local.AppDb
+import com.hb.endlesstrivia.utils.AppSharedPreferences
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 
 @Module
-class RoomModule(application: Application) {
+class StorageModule(private val application: Application) {
 
     private var appDb: AppDb =
         Room.databaseBuilder(application, AppDb::class.java, "demo-db").build()
@@ -26,5 +27,11 @@ class RoomModule(application: Application) {
     fun providesAppDao(demoDatabase: AppDb): AppDao {
         return demoDatabase.appDao()
     }
+
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(): AppSharedPreferences = AppSharedPreferences(application)
+
 
 }

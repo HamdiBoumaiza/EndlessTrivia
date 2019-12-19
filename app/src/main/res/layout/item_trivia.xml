@@ -11,7 +11,7 @@
 
         <variable
             name="itemClickListener"
-            type="com.hb.endlesstrivia.ui.TriviaItemClickListener" />
+            type="com.hb.endlesstrivia.ui.list_trivia.TriviaItemClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView

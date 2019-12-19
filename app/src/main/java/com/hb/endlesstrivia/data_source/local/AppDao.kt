@@ -1,6 +1,5 @@
 package com.hb.endlesstrivia.data_source.local
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
@@ -13,7 +12,7 @@ interface AppDao {
     @Query("SELECT * FROM trivia")
     fun getListTrivias(): List<Trivia>
 
-
     @Insert(onConflict = REPLACE)
     fun setListTrivias(listTrivia: List<Trivia?>)
+
 }

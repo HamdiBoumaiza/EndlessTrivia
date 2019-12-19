@@ -2,14 +2,12 @@ package com.hb.endlesstrivia.di.modules
 
 import com.hb.endlesstrivia.api.ApiService
 import com.hb.endlesstrivia.data_source.local.AppDao
-import com.hb.endlesstrivia.data_source.local.AppDb
 import com.hb.endlesstrivia.data_source.remote.RemoteDataSourceImpl
 import com.hb.endlesstrivia.di.IoDispatcher
 import com.hb.endlesstrivia.repository.AppRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher
-import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module
@@ -24,6 +22,6 @@ class RepositoryModule {
         appDao: AppDao
     ): AppRepositoryImpl {
         val userDataSource = RemoteDataSourceImpl(api, ioDispatcher)
-        return AppRepositoryImpl(userDataSource, appDao)
+        return AppRepositoryImpl(userDataSource, appDao, ioDispatcher)
     }
 }

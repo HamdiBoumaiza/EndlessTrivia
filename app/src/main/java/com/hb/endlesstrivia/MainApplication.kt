@@ -5,16 +5,14 @@ import com.facebook.stetho.Stetho
 import com.hb.endlesstrivia.di.component.AppComponents
 import com.hb.endlesstrivia.di.component.DaggerAppComponents
 import com.hb.endlesstrivia.di.modules.AppModule
-import com.hb.endlesstrivia.di.modules.RoomModule
+import com.hb.endlesstrivia.di.modules.StorageModule
 import timber.log.Timber
 
 open class MainApplication : Application() {
 
-
     companion object {
         lateinit var appComponents: AppComponents
     }
-
 
     override fun onCreate() {
         super.onCreate()
@@ -23,11 +21,10 @@ open class MainApplication : Application() {
         initTimber()
     }
 
-
     private fun initDagger(app: MainApplication): AppComponents =
         DaggerAppComponents.builder()
             .appModule(AppModule(app))
-            .roomModule(RoomModule(app))
+            .storageModule(StorageModule(app))
             .build()
 
     private fun initStetho() {

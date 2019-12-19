@@ -13,8 +13,7 @@ class DaggerViewModelFactory @Inject constructor(private val viewModelsMap: Map<
     ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        val creator = viewModelsMap[modelClass] ?:
-        viewModelsMap.asIterable().firstOrNull {
+        val creator = viewModelsMap[modelClass] ?: viewModelsMap.asIterable().firstOrNull {
             modelClass.isAssignableFrom(it.key)
         }?.value ?: throw IllegalArgumentException("unknown model class $modelClass")
         return try {

@@ -6,16 +6,26 @@
     <data>
         <variable
             name="mainViewModel"
-            type="com.hb.endlesstrivia.ui.MainActivityViewModel" />
+            type="com.hb.endlesstrivia.ui.list_trivia.MainActivityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:id="@+id/constraint_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.MainActivity">
+        tools:context=".ui.list_trivia.MainActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_list_trivia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:gravity="center"
+            tools:text="message"
+            android:id="@+id/tv_error_message"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

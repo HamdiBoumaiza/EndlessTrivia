@@ -37,6 +37,7 @@ dependencies {
     def room_version = "2.1.0-alpha03"
     def recyclerview_version = "1.1.0"
     def cardview_version = "1.0.0"
+    def material_version = "1.0.0"
 
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -53,6 +54,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
 
     // ui
+    implementation "com.google.android.material:material:$material_version"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
     implementation "androidx.cardview:cardview:$cardview_version"
 

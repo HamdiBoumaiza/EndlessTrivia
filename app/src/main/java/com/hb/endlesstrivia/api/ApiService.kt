@@ -7,12 +7,12 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET(BASE_URL)
-    suspend fun getListTrivia(
+    @GET(LIST_TRIVIA_URL)
+    fun getListTriviaAsync(
         @Query("amount") amount: String,
-        @Query("category") category: String,
-        @Query("difficulty") difficulty: String,
-        @Query("type") type: String
+        @Query("category") category: String?,
+        @Query("difficulty") difficulty: String?,
+        @Query("type") type: String?
     ): Deferred<ResponseListTrivia>
 
 }
