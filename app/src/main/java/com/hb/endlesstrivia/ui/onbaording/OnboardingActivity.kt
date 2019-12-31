@@ -1,5 +1,6 @@
 package com.hb.endlesstrivia.ui.onbaording
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -7,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.hb.endlesstrivia.MainApplication
 import com.hb.endlesstrivia.R
 import com.hb.endlesstrivia.databinding.ActivityOnboardingBinding
+import com.hb.endlesstrivia.ui.filter_trivia.FilterTriviaActivity
 import com.hb.endlesstrivia.utils.viewModelProvider
 import javax.inject.Inject
 
@@ -29,6 +31,7 @@ class OnboardingActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(
             this, R.layout.activity_onboarding
         )
-
+        startActivity(Intent(this, FilterTriviaActivity::class.java))
+        finish()
     }
 }

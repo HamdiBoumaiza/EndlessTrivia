@@ -37,6 +37,10 @@ class FilterViewModel @Inject constructor(
         return listOf("Easy", "Medium", "Hard")
     }
 
+    fun getListAmounts(): List<String> {
+        return listOf("10", "20", "30", "40", "50")
+    }
+
     fun getListTypes(): List<Pair<String, String>> {
         return listOf(Pair("Multiple Choices", "multiple"), Pair("True/False", "boolean"))
     }

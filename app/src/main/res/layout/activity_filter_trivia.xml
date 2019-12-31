@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.list_trivia.MainActivity">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tv_error_message"
@@ -16,6 +16,67 @@
             android:textSize="20sp"
             tools:text="Endless Trivia" />
 
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical_90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <Spinner
+            android:id="@+id/spinner_category"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical_90"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_10"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinner_type"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical_90"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_10"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
+
+        <Spinner
+            android:id="@+id/spinner_difficulty"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical_90"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_10"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_type" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Search"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical_90"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_10"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_difficulty" />
+
+
+        <ToggleButton
+            android:id="@+id/toggle_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical_90"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_10"
+            app:layout_constraintTop_toBottomOf="@+id/button_confirm" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

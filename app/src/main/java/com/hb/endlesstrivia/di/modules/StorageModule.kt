@@ -29,8 +29,8 @@ class StorageModule(private val application: Application) {
     }
 
 
-    @Provides
     @Singleton
+    @Provides
     fun provideSharedPreferences(): AppSharedPreferences = AppSharedPreferences(application)
 
 

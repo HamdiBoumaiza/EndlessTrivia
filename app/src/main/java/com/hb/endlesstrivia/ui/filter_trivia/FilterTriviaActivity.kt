@@ -1,20 +1,29 @@
 package com.hb.endlesstrivia.ui.filter_trivia
 
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.hb.endlesstrivia.MainApplication
 import com.hb.endlesstrivia.R
+import com.hb.endlesstrivia.data.RequestListTrivia
 import com.hb.endlesstrivia.databinding.ActivityFilterTriviaBinding
 import com.hb.endlesstrivia.utils.viewModelProvider
 import javax.inject.Inject
 
-class FilterTriviaActivity : AppCompatActivity() {
 
+class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener,
+    View.OnClickListener {
+
+    private var selectedCategory: String? = null
+    private lateinit var selectedDifficulty: String
+    private lateinit var selectedType: String
     private val appComponents by lazy { MainApplication.appComponents }
 
-    @Inject
+    //@Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel: FilterViewModel by lazy {
@@ -30,5 +39,100 @@ class FilterTriviaActivity : AppCompatActivity() {
             this, R.layout.activity_filter_trivia
         )
 
+        initViews()
     }
+
+
+    private fun initViews() {
+        setCategorySpinner()
+        setTypeSpinner()
+        setDifficultiesSpinner()
+        binding.buttonConfirm.setOnClickListener(this)
+    }
+
+    override fun onClick(view: View?) {
+        when (view) {
+            binding.buttonConfirm -> {
+                if (validateInput()) {
+                    val request =
+                        RequestListTrivia("50", selectedCategory, selectedDifficulty, selectedType)
+                    if (binding.toggleSave.isChecked) {
+                        viewModel.saveUserPrefrences(request)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun validateInput(): Boolean {
+        if (selectedCategory != null &&
+            ::selectedDifficulty.isInitialized &&
+            ::selectedType.isInitialized
+        ) {
+
+            return true
+        }
+        return false
+    }
+
+    private fun setCategorySpinner() {
+        val listCategoriesNames = ArrayList<String>()
+        viewModel.getListCategories().forEach {
+            listCategoriesNames.add(it.first)
+        }
+        val dataAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item, listCategoriesNames
+        )
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerCategory.adapter = dataAdapter
+        binding.spinnerCategory.onItemSelectedListener = this
+
+    }
+
+    private fun setTypeSpinner() {
+        val listTypesNames = ArrayList<String>()
+        viewModel.getListTypes().forEach {
+            listTypesNames.add(it.first)
+        }
+        val dataAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item, listTypesNames
+        )
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerType.adapter = dataAdapter
+        binding.spinnerType.onItemSelectedListener = this
+
+    }
+
+    private fun setDifficultiesSpinner() {
+        val dataAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item, viewModel.getListDifficulties()
+        )
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerDifficulty.adapter = dataAdapter
+        binding.spinnerDifficulty.onItemSelectedListener = this
+
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {}
+
+    override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, p3: Long) {
+        when (view) {
+            binding.spinnerCategory -> {
+                selectedCategory = viewModel.getListCategories()[position].second
+            }
+            binding.spinnerType -> {
+                selectedType = viewModel.getListTypes()[position].second
+            }
+            binding.spinnerDifficulty -> {
+                selectedDifficulty = viewModel.getListDifficulties()[position]
+            }
+
+        }
+
+    }
+
+
 }

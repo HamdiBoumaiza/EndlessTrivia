@@ -28,15 +28,15 @@ abstract class ViewModelModule {
     @ViewModelKey(DetailsViewModel::class)
     abstract fun bindDetailsVM(detailsViewModel: DetailsViewModel): ViewModel
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(FilterViewModel::class)
-//    abstract fun bindFilterVM(filterViewModel: FilterViewModel): ViewModel
-//
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(OnboardingViewModel::class)
-//    abstract fun bindOnboardingVM(onboardingViewModel: OnboardingViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(FilterViewModel::class)
+    abstract fun bindFilterVM(filterViewModel: FilterViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OnboardingViewModel::class)
+    abstract fun bindOnboardingVM(onboardingViewModel: OnboardingViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: DaggerViewModelFactory): ViewModelProvider.Factory
