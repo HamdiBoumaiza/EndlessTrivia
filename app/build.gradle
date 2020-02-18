@@ -30,7 +30,7 @@ dependencies {
     def constraint_version = "1.1.3"
     def lifecycle_version = "2.2.0-rc03"
     def retrofit2_version = "2.6.0"
-    def coroutines_version = "1.2.1"
+    def coroutines_version = "1.3.2"
     def stetho_version = "1.5.1"
     def timber_version = "4.7.1"
     def dagger_version = "2.24"
@@ -62,6 +62,8 @@ dependencies {
     //lifecycle
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-rc03"
+
 
     //Dagger
     implementation "com.google.dagger:dagger-android:$dagger_version"

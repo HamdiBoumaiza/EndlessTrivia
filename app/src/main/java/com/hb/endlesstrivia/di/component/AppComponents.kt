@@ -35,5 +35,5 @@ interface AppComponents {
     fun inject(mainActivity: MainActivity)
     fun inject(filterTriviaActivity: FilterTriviaActivity)
     fun inject(detailsTriviaActivity: DetailsTriviaActivity)
-    fun inject(onboardingActivity: OnboardingActivity)
+    fun inject(onBoardingActivity: OnboardingActivity)
 }

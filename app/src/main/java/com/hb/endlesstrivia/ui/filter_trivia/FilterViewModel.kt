@@ -10,11 +10,11 @@ class FilterViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    fun saveUserPrefrences(requestListTrivia: RequestListTrivia) {
+    fun saveUserPreferences(requestListTrivia: RequestListTrivia) {
         appSharedPreferences.putObject(AppSharedPreferences.KEY_REQUEST_TRIVIA, requestListTrivia)
     }
 
-    fun getUserPrefrences(): RequestListTrivia? =
+    fun getUserPreferences(): RequestListTrivia? =
         appSharedPreferences.getObject(
             AppSharedPreferences.KEY_REQUEST_TRIVIA,
             RequestListTrivia::class.java
@@ -37,7 +37,7 @@ class FilterViewModel @Inject constructor(
         return listOf("Easy", "Medium", "Hard")
     }
 
-    fun getListAmounts(): List<String> {
+    fun getListTriviaNumber(): List<String> {
         return listOf("10", "20", "30", "40", "50")
     }
 

@@ -1,9 +1,11 @@
 package com.hb.endlesstrivia.ui.filter_trivia
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -11,6 +13,7 @@ import com.hb.endlesstrivia.MainApplication
 import com.hb.endlesstrivia.R
 import com.hb.endlesstrivia.data.RequestListTrivia
 import com.hb.endlesstrivia.databinding.ActivityFilterTriviaBinding
+import com.hb.endlesstrivia.ui.list_trivia.MainActivity
 import com.hb.endlesstrivia.utils.viewModelProvider
 import javax.inject.Inject
 
@@ -20,10 +23,11 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
     private var selectedCategory: String? = null
     private lateinit var selectedDifficulty: String
+    private lateinit var selectedTriviaNumber: String
     private lateinit var selectedType: String
     private val appComponents by lazy { MainApplication.appComponents }
 
-    //@Inject
+    @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel: FilterViewModel by lazy {
@@ -46,7 +50,8 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
     private fun initViews() {
         setCategorySpinner()
         setTypeSpinner()
-        setDifficultiesSpinner()
+        setSpinnerData(viewModel.getListDifficulties(), binding.spinnerDifficulty)
+        setSpinnerData(viewModel.getListTriviaNumber(), binding.spinnerTriviaNumber)
         binding.buttonConfirm.setOnClickListener(this)
     }
 
@@ -55,10 +60,16 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             binding.buttonConfirm -> {
                 if (validateInput()) {
                     val request =
-                        RequestListTrivia("50", selectedCategory, selectedDifficulty, selectedType)
+                        RequestListTrivia(
+                            selectedTriviaNumber,
+                            selectedCategory,
+                            selectedDifficulty,
+                            selectedType
+                        )
                     if (binding.toggleSave.isChecked) {
-                        viewModel.saveUserPrefrences(request)
+                        viewModel.saveUserPreferences(request)
                     }
+                    startActivity(Intent(this, MainActivity::class.java))
                 }
             }
         }
@@ -105,16 +116,18 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
     }
 
-    private fun setDifficultiesSpinner() {
+    private fun setSpinnerData(data: List<String>, spinner: Spinner) {
         val dataAdapter = ArrayAdapter(
             this,
-            android.R.layout.simple_spinner_item, viewModel.getListDifficulties()
+            android.R.layout.simple_spinner_item, data
         )
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerDifficulty.adapter = dataAdapter
-        binding.spinnerDifficulty.onItemSelectedListener = this
-
+        with(spinner) {
+            adapter = dataAdapter
+            onItemSelectedListener = this@FilterTriviaActivity
+        }
     }
+
 
     override fun onNothingSelected(p0: AdapterView<*>?) {}
 
@@ -128,6 +141,9 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             }
             binding.spinnerDifficulty -> {
                 selectedDifficulty = viewModel.getListDifficulties()[position]
+            }
+            binding.spinnerTriviaNumber -> {
+                selectedTriviaNumber = viewModel.getListTriviaNumber()[position]
             }
 
         }
