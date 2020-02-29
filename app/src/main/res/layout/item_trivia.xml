@@ -34,6 +34,8 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="@{item.question}"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"

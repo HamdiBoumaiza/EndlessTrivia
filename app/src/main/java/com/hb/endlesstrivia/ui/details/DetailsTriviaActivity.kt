@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.hb.endlesstrivia.MainApplication
 import com.hb.endlesstrivia.R
 import com.hb.endlesstrivia.databinding.ActivityDetailsTriviaBinding
+import com.hb.endlesstrivia.model.Trivia
+import com.hb.endlesstrivia.utils.TRIVIA_EXTRA
 import com.hb.endlesstrivia.utils.viewModelProvider
 import javax.inject.Inject
 
@@ -31,5 +33,8 @@ class DetailsTriviaActivity : AppCompatActivity() {
             this, R.layout.activity_details_trivia
         )
 
+        intent?.let {
+            val trivia = it.getSerializableExtra(TRIVIA_EXTRA) as Trivia
+        }
     }
 }
