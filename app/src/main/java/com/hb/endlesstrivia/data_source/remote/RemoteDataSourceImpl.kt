@@ -11,7 +11,7 @@ package com.hb.endlesstrivia.data_source.remote
 import com.hb.endlesstrivia.api.ApiService
 import com.hb.endlesstrivia.data.RequestListTrivia
 import com.hb.endlesstrivia.data.ResponseListTrivia
-import com.hb.endlesstrivia.data.ResultApi
+import com.hb.endlesstrivia.data.ResultData
 import com.hb.endlesstrivia.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -24,7 +24,7 @@ class RemoteDataSourceImpl(
 
     override suspend fun listTrivia(
         requestListTrivia: RequestListTrivia
-    ): ResultApi<ResponseListTrivia> =
+    ): ResultData<ResponseListTrivia> =
         withContext(ioDispatcher) {
             val request =
                 api.getListTriviaAsync(
@@ -34,7 +34,7 @@ class RemoteDataSourceImpl(
                     requestListTrivia.type
 
                 )
-            ResultApi.Success(request.await())
+            ResultData.Success(request.await())
         }
 
 }

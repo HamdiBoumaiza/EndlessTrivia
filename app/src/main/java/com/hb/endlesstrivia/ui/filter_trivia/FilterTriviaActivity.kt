@@ -13,7 +13,7 @@ import com.hb.endlesstrivia.MainApplication
 import com.hb.endlesstrivia.R
 import com.hb.endlesstrivia.data.RequestListTrivia
 import com.hb.endlesstrivia.databinding.ActivityFilterTriviaBinding
-import com.hb.endlesstrivia.ui.list_trivia.MainActivity
+import com.hb.endlesstrivia.ui.list_trivia.ListTriviasActivity
 import com.hb.endlesstrivia.utils.viewModelProvider
 import javax.inject.Inject
 
@@ -69,7 +69,7 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                     if (binding.toggleSave.isChecked) {
                         viewModel.saveUserPreferences(request)
                     }
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, ListTriviasActivity::class.java))
                 }
             }
         }

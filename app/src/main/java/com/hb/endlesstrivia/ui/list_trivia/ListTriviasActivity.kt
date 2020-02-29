@@ -1,5 +1,6 @@
 package com.hb.endlesstrivia.ui.list_trivia
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -9,16 +10,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hb.endlesstrivia.MainApplication
 import com.hb.endlesstrivia.R
 import com.hb.endlesstrivia.data.RequestListTrivia
-import com.hb.endlesstrivia.databinding.ActivityMainBinding
+import com.hb.endlesstrivia.databinding.ActivityListTriviaBinding
 import com.hb.endlesstrivia.model.Trivia
+import com.hb.endlesstrivia.ui.details.DetailsTriviaActivity
 import com.hb.endlesstrivia.utils.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(),
+class ListTriviasActivity : AppCompatActivity(),
     TriviaItemClickListener {
 
     override fun onTriviaItemClicked(trivia: Trivia) {
         toast(trivia.question)
+        val intent = Intent(this, DetailsTriviaActivity::class.java)
+        intent.putExtra(TRIVIA_EXTRA,trivia)
+        startActivity(intent)
+
     }
 
     private val appComponents by lazy { MainApplication.appComponents }
@@ -26,21 +32,20 @@ class MainActivity : AppCompatActivity(),
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private fun getViewModel(): MainActivityViewModel {
+    private fun getViewModel(): ListTriviasViewModel {
         return viewModelProvider(viewModelFactory)
     }
 
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityListTriviaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponents.inject(this)
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<ActivityMainBinding>(
-            this, R.layout.activity_main
+        binding = DataBindingUtil.setContentView<ActivityListTriviaBinding>(
+            this, R.layout.activity_list_trivia
         ).apply {
-            mainViewModel = getViewModel()
-            lifecycleOwner = this@MainActivity
+            lifecycleOwner = this@ListTriviasActivity
         }
 
         initViews()
@@ -56,6 +61,7 @@ class MainActivity : AppCompatActivity(),
             initRecycler(it)
         })
         getViewModel().errorMessage.observe(this, Observer {
+            handleEmptyList()
             binding.constraintParent.showSnackbar(it)
         })
     }
@@ -65,7 +71,7 @@ class MainActivity : AppCompatActivity(),
             val triviasAdapter = TriviasAdapter(list, this)
             binding.recyclerListTrivia.apply {
                 setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(this@MainActivity)
+                layoutManager = LinearLayoutManager(this@ListTriviasActivity)
                 adapter = triviasAdapter
             }
         } else {
@@ -74,8 +80,10 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun handleEmptyList() {
-        binding.recyclerListTrivia.hide()
-        binding.tvErrorMessage.show()
-        binding.tvErrorMessage.text = getString(R.string.no_result)
+        with(binding) {
+            recyclerListTrivia.hide()
+            tvErrorMessage.show()
+            tvErrorMessage.text = getString(R.string.no_result)
+        }
     }
 }

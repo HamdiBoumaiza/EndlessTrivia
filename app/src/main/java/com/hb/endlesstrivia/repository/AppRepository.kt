@@ -1,14 +1,16 @@
 package com.hb.endlesstrivia.repository
 
 import com.hb.endlesstrivia.data.RequestListTrivia
-import com.hb.endlesstrivia.data.ResultApi
+import com.hb.endlesstrivia.data.ResultData
 import com.hb.endlesstrivia.model.Trivia
 
 interface AppRepository {
 
-    suspend fun getListTriviaApi(requestListTrivia: RequestListTrivia): ResultApi<List<Trivia>>
+    suspend fun getListTriviaApi(requestListTrivia: RequestListTrivia): ResultData<List<Trivia>>
 
-    suspend fun getListTriviaDb(): List<Trivia>
+    suspend fun getListTriviaDb(): ResultData<List<Trivia>>
+
+    suspend fun getListTrivia(requestListTrivia: RequestListTrivia): ResultData<List<Trivia>>
 
 
 }

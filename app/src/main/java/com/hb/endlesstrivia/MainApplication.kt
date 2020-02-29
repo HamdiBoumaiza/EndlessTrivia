@@ -6,6 +6,7 @@ import com.hb.endlesstrivia.di.component.AppComponents
 import com.hb.endlesstrivia.di.component.DaggerAppComponents
 import com.hb.endlesstrivia.di.modules.AppModule
 import com.hb.endlesstrivia.di.modules.StorageModule
+import com.hb.endlesstrivia.utils.InternetUtil
 import timber.log.Timber
 
 open class MainApplication : Application() {
@@ -19,6 +20,7 @@ open class MainApplication : Application() {
         appComponents = initDagger(this)
         initStetho()
         initTimber()
+        InternetUtil.init(this)
     }
 
     private fun initDagger(app: MainApplication): AppComponents =

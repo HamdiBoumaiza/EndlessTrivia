@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hb.endlesstrivia.ui.details.DetailsViewModel
 import com.hb.endlesstrivia.ui.filter_trivia.FilterViewModel
-import com.hb.endlesstrivia.ui.list_trivia.MainActivityViewModel
+import com.hb.endlesstrivia.ui.list_trivia.ListTriviasViewModel
 import com.hb.endlesstrivia.ui.onbaording.OnboardingViewModel
 import dagger.Binds
 import dagger.Module
@@ -20,8 +20,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MainActivityViewModel::class)
-    abstract fun bindMainActivtyVM(mainActivityViewModel: MainActivityViewModel): ViewModel
+    @ViewModelKey(ListTriviasViewModel::class)
+    abstract fun bindMainActivtyVM(mainActivityViewModel: ListTriviasViewModel): ViewModel
 
     @Binds
     @IntoMap

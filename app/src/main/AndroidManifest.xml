@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hb.endlesstrivia">
 
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -25,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.list_trivia.MainActivity"/>
+        <activity android:name=".ui.list_trivia.ListTriviasActivity"/>
         <activity android:name=".ui.filter_trivia.FilterTriviaActivity"/>
         <activity android:name=".ui.details.DetailsTriviaActivity"/>
 

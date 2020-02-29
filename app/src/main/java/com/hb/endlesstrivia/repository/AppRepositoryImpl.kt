@@ -2,11 +2,12 @@ package com.hb.endlesstrivia.repository
 
 import com.hb.endlesstrivia.data.RemoteDataNotFoundException
 import com.hb.endlesstrivia.data.RequestListTrivia
-import com.hb.endlesstrivia.data.ResultApi
+import com.hb.endlesstrivia.data.ResultData
 import com.hb.endlesstrivia.data_source.local.AppDao
 import com.hb.endlesstrivia.data_source.remote.RemoteDataSource
 import com.hb.endlesstrivia.di.IoDispatcher
 import com.hb.endlesstrivia.model.Trivia
+import com.hb.endlesstrivia.utils.InternetUtil
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -16,25 +17,35 @@ class AppRepositoryImpl(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : AppRepository {
 
+    private val isInternetOn = InternetUtil.isInternetOn()
+
     override suspend fun getListTriviaApi(
         requestListTrivia: RequestListTrivia
-    ): ResultApi<List<Trivia>> {
+    ): ResultData<List<Trivia>> {
         return when (val result = remoteDataSource.listTrivia(requestListTrivia)) {
-            is ResultApi.Success -> {
+            is ResultData.Success -> {
                 val response = result.data.results
                 withContext(ioDispatcher) { appDao.setListTrivias(response) }
-                ResultApi.Success(response)
+                ResultData.Success(response)
             }
-            is ResultApi.Error -> {
-                ResultApi.Error(RemoteDataNotFoundException())
+            is ResultData.Error -> {
+                ResultData.Error(RemoteDataNotFoundException())
             }
         }
     }
 
-    override suspend fun getListTriviaDb(): List<Trivia> =
+    override suspend fun getListTriviaDb(): ResultData<List<Trivia>> =
         withContext(ioDispatcher) {
-            appDao.getListTrivias()
+            ResultData.Success(appDao.getListTrivias())
         }
+
+    override suspend fun getListTrivia(requestListTrivia: RequestListTrivia): ResultData<List<Trivia>> {
+        return if (isInternetOn) {
+            getListTriviaApi(requestListTrivia)
+        } else {
+            getListTriviaDb()
+        }
+    }
 
 
 }

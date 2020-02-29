@@ -10,9 +10,9 @@ import com.hb.endlesstrivia.model.Trivia
 interface AppDao {
 
     @Query("SELECT * FROM trivia")
-    fun getListTrivias(): List<Trivia>
+    suspend fun getListTrivias(): List<Trivia>
 
     @Insert(onConflict = REPLACE)
-    fun setListTrivias(listTrivia: List<Trivia?>)
+    suspend fun setListTrivias(listTrivia: List<Trivia?>)
 
 }

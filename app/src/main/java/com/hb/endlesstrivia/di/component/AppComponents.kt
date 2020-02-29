@@ -6,7 +6,7 @@ import com.hb.endlesstrivia.data_source.local.AppDb
 import com.hb.endlesstrivia.di.modules.*
 import com.hb.endlesstrivia.ui.details.DetailsTriviaActivity
 import com.hb.endlesstrivia.ui.filter_trivia.FilterTriviaActivity
-import com.hb.endlesstrivia.ui.list_trivia.MainActivity
+import com.hb.endlesstrivia.ui.list_trivia.ListTriviasActivity
 import com.hb.endlesstrivia.ui.onbaording.OnboardingActivity
 import dagger.Component
 import retrofit2.Retrofit
@@ -32,7 +32,7 @@ interface AppComponents {
 
     fun appDatabase(): AppDb
 
-    fun inject(mainActivity: MainActivity)
+    fun inject(mainActivity: ListTriviasActivity)
     fun inject(filterTriviaActivity: FilterTriviaActivity)
     fun inject(detailsTriviaActivity: DetailsTriviaActivity)
     fun inject(onBoardingActivity: OnboardingActivity)

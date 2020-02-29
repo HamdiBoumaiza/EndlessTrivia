@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hb.endlesstrivia.data.RequestListTrivia
-import com.hb.endlesstrivia.data.ResultApi
+import com.hb.endlesstrivia.data.ResultData
 import com.hb.endlesstrivia.model.Trivia
 import com.hb.endlesstrivia.repository.AppRepositoryImpl
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainActivityViewModel @Inject constructor(
+class ListTriviasViewModel @Inject constructor(
     private val repositoryImpl: AppRepositoryImpl
 ) : ViewModel() {
 
@@ -24,23 +24,17 @@ class MainActivityViewModel @Inject constructor(
     fun getListOfTrivias(requestListTrivia: RequestListTrivia) {
         viewModelScope.launch {
             try {
-                when (val response = repositoryImpl.getListTriviaApi(requestListTrivia)) {
-                    is ResultApi.Success -> {
+                when (val response = repositoryImpl.getListTrivia(requestListTrivia)) {
+                    is ResultData.Success -> {
                         _resultListTrivia.postValue(response.data)
                     }
-                    is ResultApi.Error -> {
+                    is ResultData.Error -> {
                         _errorMessage.postValue("")
                     }
                 }
             } catch (e: Exception) {
                 _errorMessage.postValue(e.message)
             }
-        }
-    }
-
-    fun getListOfTriviasDB() {
-        viewModelScope.launch {
-            _resultListTrivia.postValue(repositoryImpl.getListTriviaDb())
         }
     }
 
