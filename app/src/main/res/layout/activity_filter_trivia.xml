@@ -22,6 +22,7 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.9" />
 
+
         <Spinner
             android:id="@+id/spinner_category"
             android:layout_width="0dp"
@@ -30,6 +31,8 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical_90"
             app:layout_constraintStart_toStartOf="@+id/guideline_vertical_10"
             app:layout_constraintTop_toTopOf="parent" />
+
+
 
         <Spinner
             android:id="@+id/spinner_type"
@@ -70,14 +73,6 @@
             app:layout_constraintTop_toBottomOf="@+id/toggle_save" />
 
 
-        <ToggleButton
-            android:id="@+id/toggle_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="@id/guideline_vertical_90"
-            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_10"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_trivia_number" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

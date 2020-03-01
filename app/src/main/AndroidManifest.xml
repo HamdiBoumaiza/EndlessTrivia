@@ -16,7 +16,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".ui.onbaording.OnboardingActivity">
+        <activity
+            android:name=".ui.onbaording.OnboardingActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,9 +26,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.list_trivia.ListTriviasActivity"/>
-        <activity android:name=".ui.filter_trivia.FilterTriviaActivity"/>
-        <activity android:name=".ui.details.DetailsTriviaActivity"/>
+        <activity android:name=".ui.list_trivia.ListTriviasActivity" />
+        <activity android:name=".ui.filter_trivia.FilterTriviaActivity" />
+        <activity android:name=".ui.details.DetailsTriviaActivity" />
 
     </application>
 

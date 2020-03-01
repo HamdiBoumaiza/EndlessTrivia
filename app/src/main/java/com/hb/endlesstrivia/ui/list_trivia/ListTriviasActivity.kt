@@ -22,7 +22,7 @@ class ListTriviasActivity : AppCompatActivity(),
     override fun onTriviaItemClicked(trivia: Trivia) {
         toast(trivia.question)
         val intent = Intent(this, DetailsTriviaActivity::class.java)
-        intent.putExtra(TRIVIA_EXTRA,trivia)
+        intent.putExtra(TRIVIA_EXTRA, trivia)
         startActivity(intent)
 
     }
@@ -53,7 +53,14 @@ class ListTriviasActivity : AppCompatActivity(),
     }
 
     private fun initViews() {
-        getViewModel().getListOfTrivias(RequestListTrivia("50", null, "medium", "boolean"))
+        getViewModel().getListOfTrivias(
+            RequestListTrivia(
+                "50",
+                null,
+                "medium",
+                TRIVIA_TYPE_MULTIPLE
+            )
+        )
     }
 
     private fun initObservers() {

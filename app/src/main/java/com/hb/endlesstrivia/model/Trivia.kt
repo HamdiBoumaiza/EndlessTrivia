@@ -24,5 +24,5 @@ data class Trivia(
     val correct_answer: String,
 
     @SerializedName("incorrect_answers")
-    val incorrect_answers: List<String>
+    var incorrect_answers: List<String>
 ) : Serializable

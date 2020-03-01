@@ -2,4 +2,19 @@
     <string name="app_name">EndlessTrivia</string>
     <string name="no_result">No Result</string>
     <string name="search">Search</string>
+
+    <string-array name="triviaNumber">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+    </string-array>
+
+    <string-array name="triviaDifficulty">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
+
 </resources>

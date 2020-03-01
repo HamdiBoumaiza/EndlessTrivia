@@ -14,6 +14,7 @@ import com.hb.endlesstrivia.R
 import com.hb.endlesstrivia.data.RequestListTrivia
 import com.hb.endlesstrivia.databinding.ActivityFilterTriviaBinding
 import com.hb.endlesstrivia.ui.list_trivia.ListTriviasActivity
+import com.hb.endlesstrivia.utils.toast
 import com.hb.endlesstrivia.utils.viewModelProvider
 import javax.inject.Inject
 
@@ -66,9 +67,7 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                             selectedDifficulty,
                             selectedType
                         )
-                    if (binding.toggleSave.isChecked) {
-                        viewModel.saveUserPreferences(request)
-                    }
+                    viewModel.saveUserPreferences(request)
                     startActivity(Intent(this, ListTriviasActivity::class.java))
                 }
             }
@@ -76,14 +75,25 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
     }
 
     private fun validateInput(): Boolean {
-        if (selectedCategory != null &&
-            ::selectedDifficulty.isInitialized &&
-            ::selectedType.isInitialized
-        ) {
-
-            return true
+        return when {
+            selectedCategory == null -> {
+                toast("Please select a category")
+                false
+            }
+            !::selectedDifficulty.isInitialized -> {
+                toast("Please select a difficulty level")
+                false
+            }
+            !::selectedType.isInitialized -> {
+                toast("Please select a type")
+                false
+            }
+            !::selectedTriviaNumber.isInitialized -> {
+                toast("Please select a number")
+                false
+            }
+            else -> true
         }
-        return false
     }
 
     private fun setCategorySpinner() {
@@ -103,6 +113,7 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
     private fun setTypeSpinner() {
         val listTypesNames = ArrayList<String>()
+        resources.getStringArray(R.array.triviaNumber)
         viewModel.getListTypes().forEach {
             listTypesNames.add(it.first)
         }
@@ -121,7 +132,7 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             this,
             android.R.layout.simple_spinner_item, data
         )
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        dataAdapter.setDropDownViewResource(R.layout.item_spinner)
         with(spinner) {
             adapter = dataAdapter
             onItemSelectedListener = this@FilterTriviaActivity

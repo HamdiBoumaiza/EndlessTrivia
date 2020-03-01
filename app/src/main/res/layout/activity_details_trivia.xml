@@ -85,5 +85,15 @@
             tools:text="answer 4" />
 
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_question"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="question_mark_animation.json" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
