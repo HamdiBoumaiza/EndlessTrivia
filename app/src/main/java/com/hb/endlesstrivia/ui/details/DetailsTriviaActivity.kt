@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.hb.endlesstrivia.MainApplication
@@ -97,11 +98,9 @@ class DetailsTriviaActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun verifyAnswer(answer: TextView) {
         if (trivia.correct_answer == answer.text.toString()) {
-            toast("right answer")
-            answer.background = resources.getDrawable(R.drawable.background_right_answer)
+            answer.background = ContextCompat.getDrawable(this,R.drawable.background_right_answer)
         } else {
-            answer.background = resources.getDrawable(R.drawable.background_wrong_answer)
-            toast("wrong answer")
+            answer.background = ContextCompat.getDrawable(this,R.drawable.background_wrong_answer)
         }
     }
 }

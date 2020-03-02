@@ -8,11 +8,13 @@ import com.hb.endlesstrivia.data.RequestListTrivia
 import com.hb.endlesstrivia.data.ResultData
 import com.hb.endlesstrivia.model.Trivia
 import com.hb.endlesstrivia.repository.AppRepositoryImpl
+import com.hb.endlesstrivia.utils.AppSharedPreferences
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ListTriviasViewModel @Inject constructor(
-    private val repositoryImpl: AppRepositoryImpl
+    private val repositoryImpl: AppRepositoryImpl,
+    private val appSharedPreferences: AppSharedPreferences
 ) : ViewModel() {
 
     private var _resultListTrivia = MutableLiveData<List<Trivia>>()
@@ -38,6 +40,11 @@ class ListTriviasViewModel @Inject constructor(
         }
     }
 
+    fun getUserPreferences(): RequestListTrivia? =
+        appSharedPreferences.getObject(
+            AppSharedPreferences.KEY_REQUEST_TRIVIA,
+            RequestListTrivia::class.java
+        )
 }
 
 

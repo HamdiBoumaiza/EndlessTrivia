@@ -7,6 +7,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.hb.endlesstrivia.MainApplication
@@ -22,7 +23,7 @@ import javax.inject.Inject
 class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener,
     View.OnClickListener {
 
-    private var selectedCategory: String? = null
+    private lateinit var selectedCategory: String
     private lateinit var selectedDifficulty: String
     private lateinit var selectedTriviaNumber: String
     private lateinit var selectedType: String
@@ -76,20 +77,28 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
     private fun validateInput(): Boolean {
         return when {
-            selectedCategory == null -> {
-                toast("Please select a category")
+            !::selectedCategory.isInitialized -> {
+                binding.spinnerCategory.background =
+                    ContextCompat.getDrawable(this, R.drawable.background_unselected_spinner)
+                toast(getString(R.string.error_select_category_message))
                 false
             }
             !::selectedDifficulty.isInitialized -> {
-                toast("Please select a difficulty level")
+                binding.spinnerCategory.background =
+                    ContextCompat.getDrawable(this, R.drawable.background_unselected_spinner)
+                toast(getString(R.string.error_select_difficulty_message))
                 false
             }
             !::selectedType.isInitialized -> {
-                toast("Please select a type")
+                binding.spinnerCategory.background =
+                    ContextCompat.getDrawable(this, R.drawable.background_unselected_spinner)
+                toast(getString(R.string.error_select_type_message))
                 false
             }
             !::selectedTriviaNumber.isInitialized -> {
-                toast("Please select a number")
+                binding.spinnerCategory.background =
+                    ContextCompat.getDrawable(this, R.drawable.background_unselected_spinner)
+                toast(getString(R.string.error_select_number_message))
                 false
             }
             else -> true
@@ -108,7 +117,6 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerCategory.adapter = dataAdapter
         binding.spinnerCategory.onItemSelectedListener = this
-
     }
 
     private fun setTypeSpinner() {
@@ -132,7 +140,7 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             this,
             android.R.layout.simple_spinner_item, data
         )
-        dataAdapter.setDropDownViewResource(R.layout.item_spinner)
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
         with(spinner) {
             adapter = dataAdapter
             onItemSelectedListener = this@FilterTriviaActivity
@@ -143,7 +151,7 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
     override fun onNothingSelected(p0: AdapterView<*>?) {}
 
     override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, p3: Long) {
-        when (view) {
+        when (p0) {
             binding.spinnerCategory -> {
                 selectedCategory = viewModel.getListCategories()[position].second
             }

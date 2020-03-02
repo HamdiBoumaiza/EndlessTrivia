@@ -21,7 +21,7 @@ class FilterViewModel @Inject constructor(
         )
 
 
-    fun getListCategories(): List<Pair<String, String?>> {
+    fun getListCategories(): List<Pair<String, String>> {
         return listOf(
             Pair("Any Category", TRIVIA_CATEGORY_ANY),
             Pair("General knowledge", TRIVIA_CATEGORY_GENERAL_KNOWLEDGE),

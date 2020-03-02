@@ -2,6 +2,10 @@
     <string name="app_name">EndlessTrivia</string>
     <string name="no_result">No Result</string>
     <string name="search">Search</string>
+    <string name="error_select_category_message">Please select a category</string>
+    <string name="error_select_difficulty_message">Please select a difficulty level</string>
+    <string name="error_select_type_message">Please select a type</string>
+    <string name="error_select_number_message">Please select a number</string>
 
     <string-array name="triviaNumber">
         <item>10</item>

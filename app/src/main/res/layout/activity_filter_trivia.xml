@@ -27,11 +27,11 @@
             android:id="@+id/spinner_category"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/background_spinner"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical_90"
             app:layout_constraintStart_toStartOf="@+id/guideline_vertical_10"
             app:layout_constraintTop_toTopOf="parent" />
-
 
 
         <Spinner
@@ -39,6 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
+            android:background="@drawable/background_spinner"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical_90"
             app:layout_constraintStart_toStartOf="@+id/guideline_vertical_10"
             app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
@@ -48,6 +49,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
+            android:background="@drawable/background_spinner"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical_90"
             app:layout_constraintStart_toStartOf="@+id/guideline_vertical_10"
             app:layout_constraintTop_toBottomOf="@+id/spinner_type" />
@@ -57,20 +59,22 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
+            android:background="@drawable/background_spinner"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical_90"
             app:layout_constraintStart_toStartOf="@+id/guideline_vertical_10"
             app:layout_constraintTop_toBottomOf="@+id/spinner_difficulty" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_confirm"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:background="@drawable/background_answer"
             android:text="@string/search"
+            android:textColor="@color/color_ffffff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical_90"
             app:layout_constraintStart_toStartOf="@+id/guideline_vertical_10"
-            app:layout_constraintTop_toBottomOf="@+id/toggle_save" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner_trivia_number" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
