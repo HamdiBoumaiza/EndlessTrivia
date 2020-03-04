@@ -17,7 +17,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_margin="8dp"
         android:background="#f5f5f5"
         android:onClick="@{() -> itemClickListener.onTriviaItemClicked(item)}"
         card_view:cardCornerRadius="3dp"
@@ -35,7 +35,7 @@
                 android:padding="10dp"
                 android:text="@{item.question}"
                 android:textColor="@color/colorAccent"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"

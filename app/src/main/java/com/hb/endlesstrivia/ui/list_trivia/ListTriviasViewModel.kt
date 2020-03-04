@@ -23,18 +23,25 @@ class ListTriviasViewModel @Inject constructor(
     private var _errorMessage = MutableLiveData<String>()
     var errorMessage: LiveData<String> = _errorMessage
 
+    private var _showLoading = MutableLiveData<Boolean>()
+    var showLoading: LiveData<Boolean> = _showLoading
+
     fun getListOfTrivias(requestListTrivia: RequestListTrivia) {
+        _showLoading.postValue(true)
         viewModelScope.launch {
             try {
                 when (val response = repositoryImpl.getListTrivia(requestListTrivia)) {
                     is ResultData.Success -> {
+                        _showLoading.postValue(false)
                         _resultListTrivia.postValue(response.data)
                     }
                     is ResultData.Error -> {
+                        _showLoading.postValue(false)
                         _errorMessage.postValue("")
                     }
                 }
             } catch (e: Exception) {
+                _showLoading.postValue(false)
                 _errorMessage.postValue(e.message)
             }
         }

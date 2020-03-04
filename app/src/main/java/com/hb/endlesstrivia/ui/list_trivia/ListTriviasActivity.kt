@@ -56,6 +56,10 @@ class ListTriviasActivity : AppCompatActivity(),
             handleEmptyList()
             binding.constraintParent.showSnackbar(it)
         })
+        getViewModel().showLoading.observe(this, Observer { showLoading ->
+            if (showLoading) binding.animationView.show()
+            else binding.animationView.hide()
+        })
     }
 
     private fun initRecycler(list: List<Trivia>) {
