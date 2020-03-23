@@ -34,7 +34,7 @@ class RemoteDataSourceImpl(
                     requestListTrivia.type
 
                 )
-            ResultData.Success(request.await())
+            ResultData.Success(request)
         }
 
 }
