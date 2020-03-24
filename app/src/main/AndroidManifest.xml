@@ -28,7 +28,6 @@
 
         <activity android:name=".ui.list_trivia.ListTriviasActivity" />
         <activity android:name=".ui.filter_trivia.FilterTriviaActivity" />
-        <activity android:name=".ui.details.DetailsTriviaActivity" />
 
     </application>
 

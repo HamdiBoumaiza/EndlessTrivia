@@ -2,7 +2,6 @@ package com.hb.endlesstrivia.di.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.hb.endlesstrivia.ui.details.DetailsViewModel
 import com.hb.endlesstrivia.ui.filter_trivia.FilterViewModel
 import com.hb.endlesstrivia.ui.list_trivia.ListTriviasViewModel
 import com.hb.endlesstrivia.ui.onbaording.OnboardingViewModel
@@ -22,11 +21,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ListTriviasViewModel::class)
     abstract fun bindMainActivtyVM(mainActivityViewModel: ListTriviasViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(DetailsViewModel::class)
-    abstract fun bindDetailsVM(detailsViewModel: DetailsViewModel): ViewModel
 
     @Binds
     @IntoMap

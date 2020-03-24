@@ -9,10 +9,12 @@
         android:layout_height="match_parent"
         tools:context=".ui.list_trivia.ListTriviasActivity">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_list_trivia"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager_list_trivia"
             android:layout_width="match_parent"
+            android:orientation="horizontal"
             android:layout_height="match_parent" />
+
 
         <TextView
             android:id="@+id/tv_error_message"

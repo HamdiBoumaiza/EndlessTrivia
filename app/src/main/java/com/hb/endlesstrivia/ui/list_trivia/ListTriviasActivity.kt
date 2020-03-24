@@ -1,22 +1,19 @@
 package com.hb.endlesstrivia.ui.list_trivia
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.hb.endlesstrivia.MainApplication
 import com.hb.endlesstrivia.R
 import com.hb.endlesstrivia.databinding.ActivityListTriviaBinding
 import com.hb.endlesstrivia.model.Trivia
-import com.hb.endlesstrivia.ui.details.DetailsTriviaActivity
 import com.hb.endlesstrivia.utils.*
 import javax.inject.Inject
 
-class ListTriviasActivity : AppCompatActivity(),
-    TriviaItemClickListener {
+
+class ListTriviasActivity : AppCompatActivity() {
 
     private val appComponents by lazy { MainApplication.appComponents }
 
@@ -64,30 +61,15 @@ class ListTriviasActivity : AppCompatActivity(),
 
     private fun initRecycler(list: List<Trivia>) {
         if (list.isNotEmpty()) {
-            val triviasAdapter = TriviasAdapter(list, this)
-            binding.recyclerListTrivia.apply {
-                setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(this@ListTriviasActivity)
-                adapter = triviasAdapter
-            }
-        } else {
-            handleEmptyList()
+            binding.viewpagerListTrivia.adapter = ViewPagerAdapter(this, list)
         }
     }
 
     private fun handleEmptyList() {
         with(binding) {
-            recyclerListTrivia.hide()
+            viewpagerListTrivia.hide()
             tvErrorMessage.show()
             tvErrorMessage.text = getString(R.string.no_result)
-        }
-    }
-
-
-    override fun onTriviaItemClicked(trivia: Trivia) {
-        Intent(this, DetailsTriviaActivity::class.java).apply {
-            putExtra(TRIVIA_EXTRA, trivia)
-            startActivity(this)
         }
     }
 

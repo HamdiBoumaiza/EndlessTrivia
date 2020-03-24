@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="item"
+            type="com.hb.endlesstrivia.model.Trivia" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_parent"
         android:layout_width="match_parent"
@@ -30,6 +36,7 @@
             android:gravity="center"
             android:textColor="@color/color_3a3a3a"
             android:textSize="20sp"
+            android:text="@{item.question}"
             app:layout_constraintBottom_toTopOf="@+id/tv_first_answer"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start"

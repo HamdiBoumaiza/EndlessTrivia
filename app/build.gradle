@@ -46,6 +46,7 @@ dependencies {
     def espresso_version = "3.2.0"
     def test_runner_version = "1.2.0"
     def test_ext_version = "1.1.1"
+    def viewpager_version = "1.0.0"
 
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -75,7 +76,7 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
     implementation "androidx.cardview:cardview:$cardview_version"
-
+    implementation "androidx.viewpager2:viewpager2:$viewpager_version"
 
     //lifecycle
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
