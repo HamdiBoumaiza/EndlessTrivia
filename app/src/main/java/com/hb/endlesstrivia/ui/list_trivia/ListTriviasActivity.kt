@@ -56,6 +56,8 @@ class ListTriviasActivity : AppCompatActivity(), View.OnClickListener {
             if (position == list.size - 1) {
                 binding.imgRightArrow.hide()
             } else binding.imgRightArrow.show()
+
+            binding.tvPositionPager.text = "${position+1} / ${getViewModel().getUserPreferences()!!.amount}"
         }
     }
 
@@ -89,7 +91,7 @@ class ListTriviasActivity : AppCompatActivity(), View.OnClickListener {
             binding.viewpagerListTrivia.adapter = TriviaViewPagerAdapter(this, list)
             setViewPagerListener(list)
         } else {
-            binding.tvNoResult.show()
+            handleEmptyList()
         }
     }
 
@@ -97,7 +99,6 @@ class ListTriviasActivity : AppCompatActivity(), View.OnClickListener {
         with(binding) {
             viewpagerListTrivia.hide()
             tvErrorMessage.show()
-            tvErrorMessage.text = getString(R.string.no_result)
         }
     }
 
