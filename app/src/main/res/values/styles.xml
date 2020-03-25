@@ -10,7 +10,7 @@
 
     <!-- style for details trivia answer layout -->
     <style name="AnswerStyle">
-        <item name="android:background">@drawable/background_answer</item>
+        <item name="android:background">@drawable/background_gris</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/color_ffffff</item>
         <item name="android:textSize">20sp</item>

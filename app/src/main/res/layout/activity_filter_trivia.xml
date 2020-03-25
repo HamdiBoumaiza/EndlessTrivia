@@ -22,6 +22,17 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.9" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="questions_and_answer_animation.json"
+            app:lottie_loop="true" />
 
         <Spinner
             android:id="@+id/spinner_category"
@@ -31,7 +42,7 @@
             android:background="@drawable/background_spinner"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical_90"
             app:layout_constraintStart_toStartOf="@+id/guideline_vertical_10"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/animation_view" />
 
 
         <Spinner
@@ -68,14 +79,13 @@
             android:id="@+id/button_confirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_answer"
+            android:background="@drawable/background_gris"
             android:text="@string/search"
             android:textColor="@color/color_ffffff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical_90"
             app:layout_constraintStart_toStartOf="@+id/guideline_vertical_10"
             app:layout_constraintTop_toBottomOf="@+id/spinner_trivia_number" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,7 @@
 package com.hb.endlesstrivia.ui.list_trivia
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -13,7 +14,7 @@ import com.hb.endlesstrivia.utils.*
 import javax.inject.Inject
 
 
-class ListTriviasActivity : AppCompatActivity() {
+class ListTriviasActivity : AppCompatActivity(), View.OnClickListener {
 
     private val appComponents by lazy { MainApplication.appComponents }
 
@@ -43,11 +44,25 @@ class ListTriviasActivity : AppCompatActivity() {
         getViewModel().getUserPreferences()?.let {
             getViewModel().getListOfTrivias(it)
         }
+        binding.imgRightArrow.setOnClickListener(this)
+        binding.imgLeftArrow.setOnClickListener(this)
+    }
+
+    private fun setViewPagerListener(list: List<Trivia>) {
+        binding.viewpagerListTrivia.addPageChangeListener { position ->
+            if (position == 0) binding.imgLeftArrow.hide()
+            else binding.imgLeftArrow.show()
+
+            if (position == list.size - 1) {
+                binding.imgRightArrow.hide()
+            } else binding.imgRightArrow.show()
+        }
     }
 
     private fun initObservers() {
         getViewModel().resultListTrivia.observe(this, Observer {
             initRecycler(it)
+            setTriviaIcons()
         })
         getViewModel().errorMessage.observe(this, Observer {
             handleEmptyList()
@@ -59,9 +74,22 @@ class ListTriviasActivity : AppCompatActivity() {
         })
     }
 
+    private fun setTriviaIcons() {
+        getViewModel().getUserPreferences()?.let {
+            if (it.type == TRIVIA_TYPE_MULTIPLE) {
+                binding.imgTypeTrivia.setImageDrawable(getDrawable(R.drawable.mcq))
+            } else {
+                binding.imgTypeTrivia.setImageDrawable(getDrawable(R.drawable.true_false))
+            }
+        }
+    }
+
     private fun initRecycler(list: List<Trivia>) {
         if (list.isNotEmpty()) {
-            binding.viewpagerListTrivia.adapter = ViewPagerAdapter(this, list)
+            binding.viewpagerListTrivia.adapter = TriviaViewPagerAdapter(this, list)
+            setViewPagerListener(list)
+        } else {
+            binding.tvNoResult.show()
         }
     }
 
@@ -70,6 +98,18 @@ class ListTriviasActivity : AppCompatActivity() {
             viewpagerListTrivia.hide()
             tvErrorMessage.show()
             tvErrorMessage.text = getString(R.string.no_result)
+        }
+    }
+
+    override fun onClick(v: View?) {
+        val currentPosition = binding.viewpagerListTrivia.currentItem
+        when (v) {
+            binding.imgRightArrow -> {
+                binding.viewpagerListTrivia.currentItem = currentPosition + 1
+            }
+            binding.imgLeftArrow -> {
+                binding.viewpagerListTrivia.currentItem = currentPosition - 1
+            }
         }
     }
 

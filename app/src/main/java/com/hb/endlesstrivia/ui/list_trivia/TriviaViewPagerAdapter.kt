@@ -17,10 +17,10 @@ import com.hb.endlesstrivia.utils.TRIVIA_TYPE_MULTIPLE
 import com.hb.endlesstrivia.utils.hide
 
 
-class ViewPagerAdapter internal constructor(
+class TriviaViewPagerAdapter internal constructor(
     val context: Context,
     val data: List<Trivia>
-) : RecyclerView.Adapter<ViewPagerAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<TriviaViewPagerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
