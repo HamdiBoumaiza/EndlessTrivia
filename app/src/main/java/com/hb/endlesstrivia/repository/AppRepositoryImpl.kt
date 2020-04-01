@@ -1,8 +1,8 @@
 package com.hb.endlesstrivia.repository
 
-import com.hb.endlesstrivia.data.RemoteDataNotFoundException
 import com.hb.endlesstrivia.data.RequestListTrivia
 import com.hb.endlesstrivia.data.ResultData
+import com.hb.endlesstrivia.data.network.tryResult
 import com.hb.endlesstrivia.data_source.local.AppDao
 import com.hb.endlesstrivia.data_source.remote.RemoteDataSource
 import com.hb.endlesstrivia.di.IoDispatcher
@@ -22,14 +22,16 @@ class AppRepositoryImpl(
     override suspend fun getListTriviaApi(
         requestListTrivia: RequestListTrivia
     ): ResultData<List<Trivia>> {
-        return when (val result = remoteDataSource.listTrivia(requestListTrivia)) {
+        return when (val result = tryResult {
+            remoteDataSource.listTrivia(requestListTrivia)
+        }) {
             is ResultData.Success -> {
                 val response = result.data.results
                 withContext(ioDispatcher) { appDao.setListTrivias(response) }
                 ResultData.Success(response)
             }
             is ResultData.Error -> {
-                ResultData.Error(RemoteDataNotFoundException())
+                ResultData.Error(result.exception)
             }
         }
     }

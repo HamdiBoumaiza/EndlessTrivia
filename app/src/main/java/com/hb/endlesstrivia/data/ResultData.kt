@@ -1,6 +1,8 @@
 package com.hb.endlesstrivia.data
 
-sealed class ResultData<out T : Any> {
-    data class Success<out T : Any>(val data: T) : ResultData<T>()
-    data class Error(val exception: Exception) : ResultData<Nothing>()
+import com.hb.endlesstrivia.data.network.DataSourceException
+
+sealed class ResultData<out T> {
+    data class Success<out T>(val data: T) : ResultData<T>()
+    data class Error<out T>(val exception: DataSourceException) : ResultData<T>()
 }

@@ -2,24 +2,16 @@ package com.hb.endlesstrivia.ui.list_trivia
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.hb.endlesstrivia.MainApplication
 import com.hb.endlesstrivia.R
 import com.hb.endlesstrivia.databinding.ActivityListTriviaBinding
 import com.hb.endlesstrivia.model.Trivia
+import com.hb.endlesstrivia.ui.base.BaseActivity
 import com.hb.endlesstrivia.utils.*
-import javax.inject.Inject
 
 
-class ListTriviasActivity : AppCompatActivity(), View.OnClickListener {
-
-    private val appComponents by lazy { MainApplication.appComponents }
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+class ListTriviasActivity : BaseActivity(), View.OnClickListener {
 
     private fun getViewModel(): ListTriviasViewModel {
         return viewModelProvider(viewModelFactory)
@@ -28,7 +20,6 @@ class ListTriviasActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityListTriviaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        appComponents.inject(this)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView<ActivityListTriviaBinding>(
             this, R.layout.activity_list_trivia
@@ -57,7 +48,8 @@ class ListTriviasActivity : AppCompatActivity(), View.OnClickListener {
                 binding.imgRightArrow.hide()
             } else binding.imgRightArrow.show()
 
-            binding.tvPositionPager.text = "${position+1} / ${getViewModel().getUserPreferences()!!.amount}"
+            binding.tvPositionPager.text =
+                "${position + 1} / ${getViewModel().getUserPreferences()!!.amount}"
         }
     }
 
@@ -68,7 +60,7 @@ class ListTriviasActivity : AppCompatActivity(), View.OnClickListener {
         })
         getViewModel().errorMessage.observe(this, Observer {
             handleEmptyList()
-            binding.constraintParent.showSnackbar(it)
+            binding.constraintParent.showSnackbar(getString(it))
         })
         getViewModel().showLoading.observe(this, Observer { showLoading ->
             if (showLoading) binding.animationView.show()

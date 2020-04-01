@@ -4,6 +4,7 @@ import android.content.Context
 import com.hb.endlesstrivia.data_source.local.AppDao
 import com.hb.endlesstrivia.data_source.local.AppDb
 import com.hb.endlesstrivia.di.modules.*
+import com.hb.endlesstrivia.ui.base.BaseActivity
 import com.hb.endlesstrivia.ui.filter_trivia.FilterTriviaActivity
 import com.hb.endlesstrivia.ui.list_trivia.ListTriviasActivity
 import com.hb.endlesstrivia.ui.onbaording.OnboardingActivity
@@ -31,6 +32,7 @@ interface AppComponents {
 
     fun appDatabase(): AppDb
 
+    fun inject(baseActivity: BaseActivity)
     fun inject(mainActivity: ListTriviasActivity)
     fun inject(filterTriviaActivity: FilterTriviaActivity)
     fun inject(onBoardingActivity: OnboardingActivity)

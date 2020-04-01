@@ -21,4 +21,8 @@
         <item>Hard</item>
     </string-array>
 
+    <string name="CommonErrorNetwork">Please check your Internet Connection.</string>
+    <string name="error_unexpected_message">Something went wrong, please try again.</string>
+
+
 </resources>

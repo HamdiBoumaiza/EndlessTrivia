@@ -6,6 +6,6 @@ import com.hb.endlesstrivia.data.ResultData
 
 interface RemoteDataSource {
 
-    suspend fun listTrivia(requestListTrivia: RequestListTrivia): ResultData<ResponseListTrivia>
+    suspend fun listTrivia(requestListTrivia: RequestListTrivia): ResponseListTrivia
 
 }

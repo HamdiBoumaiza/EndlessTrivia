@@ -14,23 +14,20 @@ import com.hb.endlesstrivia.MainApplication
 import com.hb.endlesstrivia.R
 import com.hb.endlesstrivia.data.RequestListTrivia
 import com.hb.endlesstrivia.databinding.ActivityFilterTriviaBinding
+import com.hb.endlesstrivia.ui.base.BaseActivity
 import com.hb.endlesstrivia.ui.list_trivia.ListTriviasActivity
 import com.hb.endlesstrivia.utils.toast
 import com.hb.endlesstrivia.utils.viewModelProvider
 import javax.inject.Inject
 
 
-class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener,
+class FilterTriviaActivity : BaseActivity(), AdapterView.OnItemSelectedListener,
     View.OnClickListener {
 
     private lateinit var selectedCategory: String
     private lateinit var selectedDifficulty: String
     private lateinit var selectedTriviaNumber: String
     private lateinit var selectedType: String
-    private val appComponents by lazy { MainApplication.appComponents }
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel: FilterViewModel by lazy {
         viewModelProvider(viewModelFactory) as FilterViewModel
@@ -39,7 +36,6 @@ class FilterTriviaActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
     private lateinit var binding: ActivityFilterTriviaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        appComponents.inject(this)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(
             this, R.layout.activity_filter_trivia
