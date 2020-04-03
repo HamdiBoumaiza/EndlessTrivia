@@ -22,21 +22,7 @@ class AppRepositoryImpl(
     override suspend fun getListTriviaApi(
         requestListTrivia: RequestListTrivia
     ): ResultData<List<Trivia>> {
-        return when (val result = tryResult {
-            remoteDataSource.listTrivia(requestListTrivia)
-        }) {
-            is ResultData.Success -> {
-                val response = result.data.results
-                withContext(ioDispatcher) { appDao.setListTrivias(response) }
-                ResultData.Success(response)
-            }
-            is ResultData.Error -> {
-                ResultData.Error(result.exception)
-            }
-            is ResultData.Loading ->{
-                ResultData.Loading(result.show)
-            }
-        }
+        return  tryResult { remoteDataSource.listTrivia(requestListTrivia).results}
     }
 
     override suspend fun getListTriviaDb(): ResultData<List<Trivia>> =
