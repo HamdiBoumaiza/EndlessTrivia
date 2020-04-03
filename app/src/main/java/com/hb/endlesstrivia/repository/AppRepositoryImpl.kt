@@ -33,6 +33,9 @@ class AppRepositoryImpl(
             is ResultData.Error -> {
                 ResultData.Error(result.exception)
             }
+            is ResultData.Loading ->{
+                ResultData.Loading(result.show)
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.hb.endlesstrivia.R
+import com.hb.endlesstrivia.data.ResultData
 import com.hb.endlesstrivia.databinding.ActivityListTriviaBinding
 import com.hb.endlesstrivia.model.Trivia
 import com.hb.endlesstrivia.ui.base.BaseActivity
@@ -54,17 +55,24 @@ class ListTriviasActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun initObservers() {
-        getViewModel().resultListTrivia.observe(this, Observer {
-            initRecycler(it)
-            setTriviaIcons()
-        })
-        getViewModel().errorMessage.observe(this, Observer {
-            handleEmptyList()
-            binding.constraintParent.showSnackbar(getString(it))
-        })
-        getViewModel().showLoading.observe(this, Observer { showLoading ->
-            if (showLoading) binding.animationView.show()
-            else binding.animationView.hide()
+        getViewModel().resultListTrivia.observe(this, Observer { result ->
+            when (result) {
+                is ResultData.Success -> {
+                    initRecycler(result.data)
+                    setTriviaIcons()
+                }
+                is ResultData.Error -> {
+                    handleEmptyList()
+                    binding.constraintParent.showSnackbar(getString(result.exception.messageResource))
+                }
+                is ResultData.Loading -> {
+                    if (result.show) {
+                        binding.animationView.show()
+                    } else {
+                        binding.animationView.hide()
+                    }
+                }
+            }
         })
     }
 

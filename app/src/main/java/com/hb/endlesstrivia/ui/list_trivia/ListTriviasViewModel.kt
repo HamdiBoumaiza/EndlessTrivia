@@ -17,28 +17,15 @@ class ListTriviasViewModel @Inject constructor(
     private val appSharedPreferences: AppSharedPreferences
 ) : ViewModel() {
 
-    private var _resultListTrivia = MutableLiveData<List<Trivia>>()
-    var resultListTrivia: LiveData<List<Trivia>> = _resultListTrivia
+    private var _resultListTrivia = MutableLiveData<ResultData<List<Trivia>>>()
+    var resultListTrivia: LiveData<ResultData<List<Trivia>>> = _resultListTrivia
 
-    private var _errorMessage = MutableLiveData<Int>()
-    var errorMessage: LiveData<Int> = _errorMessage
-
-    private var _showLoading = MutableLiveData<Boolean>()
-    var showLoading: LiveData<Boolean> = _showLoading
 
     fun getListOfTrivias(requestListTrivia: RequestListTrivia) {
-        _showLoading.postValue(true)
+        _resultListTrivia.value = (ResultData.Loading(true))
         viewModelScope.launch {
-            when (val response = repositoryImpl.getListTrivia(requestListTrivia)) {
-                is ResultData.Success -> {
-                    _showLoading.postValue(false)
-                    _resultListTrivia.postValue(response.data)
-                }
-                is ResultData.Error -> {
-                    _showLoading.postValue(false)
-                    _errorMessage.postValue(response.exception.messageResource)
-                }
-            }
+            _resultListTrivia.value = (repositoryImpl.getListTrivia(requestListTrivia))
+            _resultListTrivia.value = (ResultData.Loading(false))
         }
     }
 
